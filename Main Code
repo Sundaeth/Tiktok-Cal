@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Selling Price Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: auto;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>TikTok Selling Price Calculator</h2>
+        <p>Enter your product cost to calculate the required selling price.</p>
+        
+        <input type="number" id="productCost" placeholder="Enter product cost (฿)" min="0">
+        <button onclick="calculateSellingPrice()">Calculate</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateSellingPrice() {
+            // Get product cost from user input
+            let productCost = parseFloat(document.getElementById("productCost").value);
+
+            // Check if input is valid
+            if (isNaN(productCost) || productCost <= 0) {
+                document.getElementById("result").innerHTML = "Please enter a valid product cost.";
+                return;
+            }
+
+            // Define TikTok fee percentages
+            const transactionFeePercentage = 3.21 / 100;
+            const commissionFeePercentage = 5.35 / 100;
+            const sfpServiceFeePercentage = 5.35 / 100;
+
+            // Total fees combined
+            const totalFeePercentage = transactionFeePercentage + commissionFeePercentage + sfpServiceFeePercentage;
+
+            // Desired net profit
+            const desiredProfit = 150;
+
+            // Calculate required selling price
+            const requiredSellingPrice = (productCost + desiredProfit) / (1 - totalFeePercentage);
+
+            // Display the result
+            document.getElementById("result").innerHTML = "Required Selling Price: ฿" + requiredSellingPrice.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
